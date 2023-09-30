@@ -1,0 +1,13 @@
+class Solution:
+    def findTilt(self, root: Optional[TreeNode]) -> int:
+        self.tilt = 0
+        def find(root):
+            # nonlocal tilt 
+            if not root:
+                return 0
+            l = find(root.left)
+            r = find(root.right)
+            self.tilt += abs(l - r)
+            return l + r + root.val
+        find(root)
+        return self.tilt
